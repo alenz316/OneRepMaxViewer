@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.square.okio)
     testImplementation(libs.junit)
-    testImplementation(libs.kotlinx.test)
+    testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
