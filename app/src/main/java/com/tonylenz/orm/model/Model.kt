@@ -20,6 +20,7 @@ enum class WeightUnit {
     Pounds
 }
 
+// TODO: Refactor `Weight` to be more ergonomic. e.g. 15.lb and 25.kg. (Similar to compose .db and .sp)
 data class Weight(val value: Double, val unit: WeightUnit) {
     init {
         if (value < 0) throw IllegalArgumentException("Negative weight doesn't make sense: $value")
