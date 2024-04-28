@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.kotlinx.datetime)
     implementation(libs.square.okio)
+    implementation(libs.kotlin.result)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.test.coroutins)

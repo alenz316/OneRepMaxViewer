@@ -28,6 +28,7 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.re
 kotlinx-test-coroutins = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version = "1.8.0" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.6.0-RC.2" }
 square-okio = { group = "com.squareup.okio", name = "okio", version = "3.9.0" }
+kotlin-result = { group = "com.michael-bull.kotlin-result", name = "kotlin-result", version = "2.0.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
