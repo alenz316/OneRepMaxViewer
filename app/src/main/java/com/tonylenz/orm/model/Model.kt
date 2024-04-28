@@ -26,7 +26,7 @@ data class Weight(val value: Double, val unit: WeightUnit) {
     }
 }
 
-data class Set(
+data class WorkoutSet(
     val exercise: Exercise,
     val reps: Reps,
     val weight: Weight,

@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.square.okio)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.test.coroutins)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
