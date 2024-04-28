@@ -128,3 +128,7 @@ abstract class HistoricalDataRepoTest {
 class HistoricalDataMemRepoTest : HistoricalDataRepoTest() {
     override val repo: HistoricalDataRepo = HistoricalDataMemRepo()
 }
+
+class HistoricalDataRepoImplTest : HistoricalDataRepoTest() {
+    override val repo: HistoricalDataRepo = HistoricalDataRepoImpl()
+}
