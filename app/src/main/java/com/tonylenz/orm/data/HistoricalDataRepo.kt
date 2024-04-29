@@ -55,6 +55,7 @@ class HistoricalDataMemRepo : HistoricalDataRepo {
     }
 }
 
+// TODO: Implement using some backing data access mechanism, e.g. Room or an API
 class HistoricalDataRepoImpl : HistoricalDataRepo {
     override suspend fun saveWorkoutSets(workouts: List<WorkoutSet>, replaceAll: Boolean) {
         TODO("Not yet implemented")

@@ -129,6 +129,7 @@ class HistoricalDataMemRepoTest : HistoricalDataRepoTest() {
     override val repo: HistoricalDataRepo = HistoricalDataMemRepo()
 }
 
-class HistoricalDataRepoImplTest : HistoricalDataRepoTest() {
-    override val repo: HistoricalDataRepo = HistoricalDataRepoImpl()
-}
+// TODO: Uncomment below when HistoricalDataRepoImpl is implemented
+//class HistoricalDataRepoImplTest : HistoricalDataRepoTest() {
+//    override val repo: HistoricalDataRepo = HistoricalDataRepoImpl()
+//}
