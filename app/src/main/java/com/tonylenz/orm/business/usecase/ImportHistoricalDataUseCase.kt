@@ -7,8 +7,9 @@ import com.tonylenz.orm.business.parseHistoricalEntry
 import com.tonylenz.orm.data.HistoricalDataRepo
 import com.tonylenz.orm.model.WorkoutSet
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.withContext
 import okio.Source
 import okio.buffer
 
@@ -22,7 +23,7 @@ import okio.buffer
 suspend fun importHistoricalData(
     data: Source,
     repo: HistoricalDataRepo,
-): Result<Unit, Exception> = coroutineScope{
+): Result<Unit, Exception> = withContext(Dispatchers.IO) {
     try {
         data.buffer().use { data ->
             val dataList = mutableListOf<WorkoutSet>()
