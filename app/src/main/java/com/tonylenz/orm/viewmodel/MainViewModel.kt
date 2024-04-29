@@ -3,6 +3,7 @@ package com.tonylenz.orm.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tonylenz.orm.business.usecase.getTheoreticalOneRepMaxes
+import com.tonylenz.orm.business.usecase.importHistoricalData
 import com.tonylenz.orm.data.HistoricalDataMemRepo
 import com.tonylenz.orm.data.HistoricalDataRepo
 import com.tonylenz.orm.model.Brzycki
@@ -11,6 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okio.Source
 
 class MainViewModel : ViewModel() {
 
@@ -25,6 +27,18 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             delay(2000) // So we can see the spinner
             loadData()
+        }
+    }
+
+    fun importData(source: Source) {
+        viewModelScope.launch {
+            _contentUiState.value = ContentUiState.Loading
+            val result = importHistoricalData(source, repo)
+            if (result.isErr) {
+                _contentUiState.value = ContentUiState.Error
+            } else {
+                loadData()
+            }
         }
     }
 

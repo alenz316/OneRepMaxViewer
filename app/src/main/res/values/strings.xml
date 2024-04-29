@@ -3,4 +3,5 @@
     <string name="pounds_short">lbs</string>
     <string name="one_rep_max_record">1 RM Record</string>
     <string name="no_data_message">No data, load data using the FAB</string>
+    <string name="generic_error_message">An error occurred, please try again</string>
 </resources>

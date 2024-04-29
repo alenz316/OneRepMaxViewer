@@ -28,10 +28,10 @@ fun ExerciseMaxItem(
 ) {
     Column(
         modifier = Modifier
-            .padding(8.dp)
             .clickable {
                 onClick?.invoke(itemData)
             }
+            .padding(8.dp)
     ) {
         Row {
             Text(text = itemData.exercise.name)
