@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">One Rep Max</string>
+    <string name="app_name">One Rep Maxes</string>
     <string name="pounds_short">lbs</string>
     <string name="one_rep_max_record">1 RM Record</string>
     <string name="no_data_message">No data, load data using the FAB</string>

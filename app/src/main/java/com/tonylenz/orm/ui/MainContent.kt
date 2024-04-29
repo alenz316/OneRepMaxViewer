@@ -12,18 +12,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.tonylenz.orm.R
+import com.tonylenz.orm.business.usecase.OneRepMax
 import com.tonylenz.orm.ui.state.ContentUiState
 
 @Composable
 fun MainContent(
     paddingValues: PaddingValues,
     uiState: ContentUiState,
+    onItemClick: (item: OneRepMax) -> Unit
 ) {
     val alignment: Alignment = when (uiState) {
         is ContentUiState.ExerciseMaxDetails -> Alignment.TopStart
         is ContentUiState.ExerciseMaxesList -> Alignment.TopStart
         else -> Alignment.Center
     }
+    // TODO: Add transition animations
     Box(
         modifier = Modifier
             .padding(paddingValues)
@@ -32,10 +35,12 @@ fun MainContent(
     ) {
         when (val state = uiState) {
             ContentUiState.Error -> Text(text = stringResource(id = R.string.generic_error_message))
-            is ContentUiState.ExerciseMaxDetails -> TODO()
-            is ContentUiState.ExerciseMaxesList -> ExerciseMaxList(oneRepMaxes = state.exerciseMaxes) {
-
-            }
+            is ContentUiState.ExerciseMaxDetails -> Text(text = state.max.exercise.name)
+            is ContentUiState.ExerciseMaxesList ->
+                ExerciseMaxList(
+                    oneRepMaxes = state.exerciseMaxes,
+                    onClick = onItemClick
+                )
 
             ContentUiState.Loading -> CircularProgressIndicator()
             ContentUiState.NoData -> Text(text = stringResource(id = R.string.no_data_message))

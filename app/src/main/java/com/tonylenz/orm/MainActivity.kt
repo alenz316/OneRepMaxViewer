@@ -11,10 +11,12 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -54,7 +56,11 @@ class MainActivity : ComponentActivity() {
 
             AppTheme {
                 Scaffold(
-                    topBar = { TopBar() },
+                    topBar = {
+                        TopBar(uiState) {
+                            viewModel.back()
+                        }
+                    },
                     floatingActionButton = {
                         Fab(uiState) {
                             getContent.launch("text/plain")
@@ -65,6 +71,7 @@ class MainActivity : ComponentActivity() {
                     MainContent(
                         paddingValues = paddingValues,
                         uiState = uiState,
+                        onItemClick = { viewModel.showDetails(it) }
                     )
                 }
             }
@@ -74,10 +81,19 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+fun TopBar(
+    uiState: ContentUiState,
+    onBackClick: () -> Unit,
+) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.app_name))
+            Text(
+                text = if (uiState is ContentUiState.ExerciseMaxDetails) {
+                    uiState.max.exercise.name
+                } else {
+                    stringResource(id = R.string.app_name)
+                }
+            )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -85,6 +101,16 @@ fun TopBar() {
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
             actionIconContentColor = MaterialTheme.colorScheme.onSecondary,
         ),
+        navigationIcon = {
+            if (uiState is ContentUiState.ExerciseMaxDetails) {
+                IconButton(onClick = onBackClick) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
+            }
+        }
     )
 }
 

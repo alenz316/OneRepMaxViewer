@@ -2,6 +2,7 @@ package com.tonylenz.orm.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tonylenz.orm.business.usecase.OneRepMax
 import com.tonylenz.orm.business.usecase.getTheoreticalOneRepMaxes
 import com.tonylenz.orm.business.usecase.importHistoricalData
 import com.tonylenz.orm.data.HistoricalDataMemRepo
@@ -68,4 +69,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun showDetails(oneRepMax: OneRepMax) {
+        // TODO: Dynamically query a date range
+        _contentUiState.value.let { state ->
+            require(state is ContentUiState.ExerciseMaxesList)
+            _contentUiState.value = ContentUiState.ExerciseMaxDetails(oneRepMax)
+        }
+    }
 }
