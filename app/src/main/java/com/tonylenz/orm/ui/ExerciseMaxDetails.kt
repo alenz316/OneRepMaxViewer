@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -19,7 +20,8 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.tonylenz.orm.R
 import com.tonylenz.orm.business.usecase.OneRepMax
 import com.tonylenz.orm.model.Exercise
 import com.tonylenz.orm.model.Weight
@@ -29,11 +31,15 @@ import kotlinx.datetime.format
 import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.char
 
+
 @Composable
 fun ExerciseMaxDetails(
     oneRepMax: OneRepMax,
 ) {
     val lineColor = MaterialTheme.colorScheme.secondary
+    val gridColor = MaterialTheme.colorScheme.outlineVariant
+    val graphTextColor = MaterialTheme.colorScheme.onPrimaryContainer
+    val poundsPostFix = " ${stringResource(id = R.string.pounds_short)}"
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
@@ -42,22 +48,7 @@ fun ExerciseMaxDetails(
             factory = { context ->
                 LineChart(context).apply {
                     legend.isEnabled = false
-
-                    // TODO: Figure out x and y labels
-
-                    xAxis.isEnabled = true
-                    xAxis.setDrawLabels(true)
-                    xAxis.position = XAxis.XAxisPosition.TOP
-                    xAxis.valueFormatter = IndexAxisValueFormatter(
-                        oneRepMax.dailyOneRepMaxes.map {
-                            val (date, _) = it
-                            date.format(dateFormat)
-                        }.toTypedArray()
-                    )
-
-                    xAxis.setLabelCount(oneRepMax.dailyOneRepMaxes.count(), true)
-                    xAxis.setGranularity(1.0f)
-
+                    description.isEnabled = false
 
                     val lineEntries = oneRepMax.dailyOneRepMaxes.map {
                         val (date, max) = it
@@ -67,6 +58,29 @@ fun ExerciseMaxDetails(
                     dataset.color = lineColor.toArgb()
                     dataset.circleColors = listOf(lineColor.toArgb())
                     data = LineData(dataset)
+
+                    xAxis.isEnabled = true
+                    xAxis.position = XAxis.XAxisPosition.BOTTOM
+                    xAxis.valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            return LocalDate.fromEpochDays(value.toInt()).format(dateFormat)
+                        }
+                    }
+                    xAxis.textColor = graphTextColor.toArgb()
+                    xAxis.setGranularity(1.0f)
+                    xAxis.gridColor = gridColor.toArgb()
+                    xAxis.axisLineColor = gridColor.toArgb()
+
+                    axisRight.isEnabled = false
+                    axisLeft.textColor = graphTextColor.toArgb()
+                    val defaultFormatter = axisLeft.valueFormatter
+                    axisLeft.valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            return "${defaultFormatter.getFormattedValue(value)} $poundsPostFix"
+                        }
+                    }
+                    axisLeft.gridColor = gridColor.toArgb()
+                    axisLeft.axisLineColor = gridColor.toArgb()
 
                     invalidate()
                 }
