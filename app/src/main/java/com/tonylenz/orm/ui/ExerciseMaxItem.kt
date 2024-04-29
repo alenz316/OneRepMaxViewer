@@ -70,7 +70,7 @@ private fun Preview() {
                 itemData = OneRepMax(
                     exercise = Exercise("Back Squat"),
                     weight = Weight(407.65f, WeightUnit.Pounds),
-                    dailyOneRepMax = listOf(
+                    dailyOneRepMaxes = listOf(
                         LocalDate(2020, 6, 4) to Weight(407.65f, WeightUnit.Pounds),
                     )
                 )

@@ -66,14 +66,14 @@ class GetTheoreticalOneRepMaxesTest {
                 OneRepMax(
                     exercise = Exercise("Back Squat"),
                     weight = Weight(407.64706f, WeightUnit.Pounds),
-                    dailyOneRepMax = listOf(
+                    dailyOneRepMaxes = listOf(
                         LocalDate(2020, 6, 4) to Weight(407.64706f, WeightUnit.Pounds),
                     )
                 ),
                 OneRepMax(
                     exercise = Exercise("Deadlift"),
                     weight = Weight(580.0f, WeightUnit.Pounds),
-                    dailyOneRepMax = listOf(
+                    dailyOneRepMaxes = listOf(
                         LocalDate(2020, 6, 6) to Weight(580.0f, WeightUnit.Pounds),
                         LocalDate(2020, 6, 7) to Weight(124.13793103448276f, WeightUnit.Pounds),
                         LocalDate(2020, 6, 8) to Weight(163.125f, WeightUnit.Pounds),

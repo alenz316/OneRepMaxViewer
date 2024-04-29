@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.square.okio)
     implementation(libs.kotlin.result)
+    implementation(libs.mpandroid.chart)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.test.coroutins)

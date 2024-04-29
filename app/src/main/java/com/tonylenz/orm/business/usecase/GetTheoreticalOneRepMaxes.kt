@@ -16,7 +16,7 @@ import kotlinx.datetime.LocalDate
 data class OneRepMax(
     val exercise: Exercise,
     val weight: Weight,
-    val dailyOneRepMax: List<Pair<LocalDate, Weight>>,
+    val dailyOneRepMaxes: List<Pair<LocalDate, Weight>>,
 )
 
 
@@ -56,7 +56,7 @@ suspend fun getTheoreticalOneRepMaxes(
             OneRepMax(
                 exercise = exercise,
                 weight = dailyMaxes.maxBy { it.second.value }.second,
-                dailyOneRepMax = dailyMaxes.sortedBy { it.first }
+                dailyOneRepMaxes = dailyMaxes.sortedBy { it.first }
             )
         }
         Ok(oneRepMaxes.sortedBy { it.exercise.name })
