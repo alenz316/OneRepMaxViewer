@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,50 +48,77 @@ fun ExerciseMaxDetails(
         AndroidView(
             factory = { context ->
                 LineChart(context).apply {
-                    legend.isEnabled = false
-                    description.isEnabled = false
-
-                    val lineEntries = oneRepMax.dailyOneRepMaxes.map {
-                        val (date, max) = it
-                        Entry(date.toEpochDays().toFloat(), max.value)
-                    }
-                    val dataset = LineDataSet(lineEntries, "")
-                    dataset.color = lineColor.toArgb()
-                    dataset.circleColors = listOf(lineColor.toArgb())
-                    dataset.setDrawValues(false)
-                    data = LineData(dataset)
-
-                    xAxis.isEnabled = true
-                    xAxis.position = XAxis.XAxisPosition.BOTTOM
                     xAxis.valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
                             return LocalDate.fromEpochDays(value.toInt()).format(dateFormat)
                         }
                     }
-                    xAxis.textColor = graphTextColor.toArgb()
-                    xAxis.setGranularity(1.0f)
-                    xAxis.gridColor = gridColor.toArgb()
-                    xAxis.axisLineColor = gridColor.toArgb()
-
-                    axisRight.isEnabled = false
-                    axisLeft.textColor = graphTextColor.toArgb()
                     val defaultFormatter = axisLeft.valueFormatter
                     axisLeft.valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
                             return "${defaultFormatter.getFormattedValue(value)} $poundsPostFix"
                         }
                     }
-                    axisLeft.gridColor = gridColor.toArgb()
-                    axisLeft.axisLineColor = gridColor.toArgb()
-
-                    invalidate()
+                    update(
+                        oneRepMax = oneRepMax,
+                        lineColor = lineColor,
+                        gridColor = gridColor,
+                        graphTextColor = graphTextColor,
+                        poundsPostFix = poundsPostFix
+                    )
                 }
+            },
+            update = { lineChart ->
+                lineChart.update(
+                    oneRepMax = oneRepMax,
+                    lineColor = lineColor,
+                    gridColor = gridColor,
+                    graphTextColor = graphTextColor,
+                    poundsPostFix = poundsPostFix
+                )
             },
             modifier = Modifier
                 .fillMaxSize()
                 .height(300.dp)
         )
     }
+}
+
+private fun LineChart.update(
+    oneRepMax: OneRepMax,
+    lineColor: Color,
+    gridColor: Color,
+    graphTextColor: Color,
+    poundsPostFix: String,
+) {
+    // TODO: Optimize for recompositions
+    legend.isEnabled = false
+    description.isEnabled = false
+
+    val lineEntries = oneRepMax.dailyOneRepMaxes.map {
+        val (date, max) = it
+        Entry(date.toEpochDays().toFloat(), max.value)
+    }
+    val dataset = LineDataSet(lineEntries, "")
+    dataset.color = lineColor.toArgb()
+    dataset.circleColors = listOf(lineColor.toArgb())
+    dataset.setDrawValues(false)
+    data = LineData(dataset)
+
+    xAxis.isEnabled = true
+    xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+    xAxis.textColor = graphTextColor.toArgb()
+    xAxis.setGranularity(1.0f)
+    xAxis.gridColor = gridColor.toArgb()
+    xAxis.axisLineColor = gridColor.toArgb()
+
+    axisRight.isEnabled = false
+    axisLeft.textColor = graphTextColor.toArgb()
+    axisLeft.gridColor = gridColor.toArgb()
+    axisLeft.axisLineColor = gridColor.toArgb()
+
+    invalidate()
 }
 
 // ex. "Nov 26 2019"

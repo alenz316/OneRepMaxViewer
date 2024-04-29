@@ -8,7 +8,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -19,13 +21,18 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.example.compose.AppTheme
 import com.tonylenz.orm.ui.MainContent
 import com.tonylenz.orm.ui.state.ContentUiState
@@ -54,12 +61,19 @@ class MainActivity : ComponentActivity() {
                 viewModel.back()
             }
 
-            AppTheme {
+            var darkMode by remember { mutableStateOf(true) }
+
+            AppTheme(
+                darkTheme = darkMode,
+            ) {
                 Scaffold(
                     topBar = {
-                        TopBar(uiState) {
-                            viewModel.back()
-                        }
+                        TopBar(
+                            uiState = uiState,
+                            darkMode = darkMode,
+                            onBackClick = { viewModel.back() },
+                            onDarkModeToggle = { _ -> darkMode = !darkMode },
+                        )
                     },
                     floatingActionButton = {
                         Fab(uiState) {
@@ -83,7 +97,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TopBar(
     uiState: ContentUiState,
+    darkMode: Boolean,
     onBackClick: () -> Unit,
+    onDarkModeToggle: (Boolean) -> Unit,
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -110,6 +126,11 @@ fun TopBar(
                     )
                 }
             }
+        },
+        actions = {
+            Text(text = stringResource(id = R.string.dark_mode))
+            Spacer(modifier = Modifier.padding(4.dp))
+            Switch(checked = darkMode, onCheckedChange = onDarkModeToggle)
         }
     )
 }
