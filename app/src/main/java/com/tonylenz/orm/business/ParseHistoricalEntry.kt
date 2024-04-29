@@ -29,7 +29,7 @@ fun parseHistoricalEntry(entry: String): WorkoutSet {
     return WorkoutSet(
         exercise = Exercise(elements[1]),
         reps = Reps(elements[2].toInt()),
-        weight = Weight(elements[3].toDouble(), WeightUnit.Pounds), // Assumes pounds
+        weight = Weight(elements[3].toFloat(), WeightUnit.Pounds), // Assumes pounds
         date = LocalDate.parse(elements[0], dateFormat)
     )
 }

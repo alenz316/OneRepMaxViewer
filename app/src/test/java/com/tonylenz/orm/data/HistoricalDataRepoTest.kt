@@ -23,19 +23,19 @@ abstract class HistoricalDataRepoTest {
             WorkoutSet(
                 exercise = Exercise("Squat"),
                 reps = Reps(15),
-                weight = Weight(145.0, WeightUnit.Pounds),
+                weight = Weight(145.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 5)
             ),
             WorkoutSet(
                 exercise = Exercise("Squat"),
                 reps = Reps(8),
-                weight = Weight(175.0, WeightUnit.Pounds),
+                weight = Weight(175.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 8)
             ),
             WorkoutSet(
                 exercise = Exercise("Bench"),
                 reps = Reps(15),
-                weight = Weight(135.0, WeightUnit.Pounds),
+                weight = Weight(135.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 5)
             )
         )
@@ -63,7 +63,7 @@ abstract class HistoricalDataRepoTest {
             WorkoutSet(
                 exercise = Exercise("Deadlift"),
                 reps = Reps(8),
-                weight = Weight(350.0, WeightUnit.Pounds),
+                weight = Weight(350.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 8)
             )
         )
@@ -83,19 +83,19 @@ abstract class HistoricalDataRepoTest {
             WorkoutSet(
                 exercise = Exercise("Squat"),
                 reps = Reps(15),
-                weight = Weight(145.0, WeightUnit.Pounds),
+                weight = Weight(145.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 5)
             ),
             WorkoutSet(
                 exercise = Exercise("Squat"),
                 reps = Reps(8),
-                weight = Weight(175.0, WeightUnit.Pounds),
+                weight = Weight(175.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 8)
             ),
             WorkoutSet(
                 exercise = Exercise("Bench"),
                 reps = Reps(15),
-                weight = Weight(135.0, WeightUnit.Pounds),
+                weight = Weight(135.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 5)
             )
         )
@@ -111,7 +111,7 @@ abstract class HistoricalDataRepoTest {
             WorkoutSet(
                 exercise = Exercise("Deadlift"),
                 reps = Reps(8),
-                weight = Weight(350.0, WeightUnit.Pounds),
+                weight = Weight(350.0f, WeightUnit.Pounds),
                 date = LocalDate(2024, Month.JANUARY, 8)
             )
         )

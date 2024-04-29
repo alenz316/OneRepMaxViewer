@@ -14,17 +14,17 @@ class BrzyckiTest {
     @Test
     fun `Standard calculations`() {
         assertEquals(
-            Weight(112.5, Pounds),
+            Weight(112.5f, Pounds),
             Brzycki.calculateTheoreticalOneRepMax(
-                Weight(100.0, Pounds),
+                Weight(100.0f, Pounds),
                 Reps(5)
             )
         )
 
         assertEquals(
-            Weight(112.5, Pounds),
+            Weight(112.5f, Pounds),
             Brzycki.calculateTheoreticalOneRepMax(
-                Weight(100.0, Pounds),
+                Weight(100.0f, Pounds),
                 Reps(5)
             )
         )
@@ -34,7 +34,7 @@ class BrzyckiTest {
     fun `Fail 1 rep`() {
         assertFailsWith(IllegalArgumentException::class) {
             Brzycki.calculateTheoreticalOneRepMax(
-                Weight(100.0, Pounds),
+                Weight(100.0f, Pounds),
                 Reps(1)
             )
         }
@@ -44,9 +44,9 @@ class BrzyckiTest {
     fun `ORM 0 weight`() {
         // Silly but acceptable
         assertEquals(
-            Weight(0.0, Pounds),
+            Weight(0.0f, Pounds),
             Brzycki.calculateTheoreticalOneRepMax(
-                Weight(0.0, Pounds),
+                Weight(0.0f, Pounds),
                 Reps(5)
             )
         )

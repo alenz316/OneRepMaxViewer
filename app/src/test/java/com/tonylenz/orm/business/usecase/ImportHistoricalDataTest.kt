@@ -29,13 +29,13 @@ class ImportHistoricalDataTest {
             WorkoutSet(
                 exercise = Exercise("Back Squat"),
                 reps = Reps(6),
-                weight = Weight(245.0, WeightUnit.Pounds),
+                weight = Weight(245.0f, WeightUnit.Pounds),
                 date = LocalDate(2020, 10, 11),
             ),
             WorkoutSet(
                 exercise = Exercise("Barbell Bench Press"),
                 reps = Reps(4),
-                weight = Weight(45.0, WeightUnit.Pounds),
+                weight = Weight(45.0f, WeightUnit.Pounds),
                 date = LocalDate(2020, 10, 5),
             ),
         )

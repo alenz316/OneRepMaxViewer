@@ -18,7 +18,7 @@ class ParseHistoricalEntryTest {
             WorkoutSet(
                 exercise = Exercise("Back Squat"),
                 reps = Reps(3),
-                weight = Weight(285.0, WeightUnit.Pounds),
+                weight = Weight(285.0f, WeightUnit.Pounds),
                 date = LocalDate(2020, 6, 4),
             ),
             parseHistoricalEntry("Jun 04 2020,Back Squat,3,285")
@@ -28,7 +28,7 @@ class ParseHistoricalEntryTest {
             WorkoutSet(
                 exercise = Exercise("Back Squat"),
                 reps = Reps(6),
-                weight = Weight(245.0, WeightUnit.Pounds),
+                weight = Weight(245.0f, WeightUnit.Pounds),
                 date = LocalDate(2020, 10, 11),
             ),
             parseHistoricalEntry("Oct 11 2020,Back Squat,6,245")
