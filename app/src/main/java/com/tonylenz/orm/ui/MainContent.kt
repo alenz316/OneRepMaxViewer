@@ -35,7 +35,7 @@ fun MainContent(
     ) {
         when (val state = uiState) {
             ContentUiState.Error -> Text(text = stringResource(id = R.string.generic_error_message))
-            is ContentUiState.ExerciseMaxDetails -> Text(text = state.max.exercise.name)
+            is ContentUiState.ExerciseMaxDetails -> ExerciseMaxDetails(state.max)
             is ContentUiState.ExerciseMaxesList ->
                 ExerciseMaxList(
                     oneRepMaxes = state.exerciseMaxes,
@@ -45,6 +45,7 @@ fun MainContent(
             ContentUiState.Loading -> CircularProgressIndicator()
             ContentUiState.NoData -> Text(text = stringResource(id = R.string.no_data_message))
         }
-
     }
 }
+
+// TODO: Add previews

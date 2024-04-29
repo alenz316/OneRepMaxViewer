@@ -28,8 +28,11 @@ fun ExerciseMaxItem(
 ) {
     Column(
         modifier = Modifier
-            .clickable {
-                onClick?.invoke(itemData)
+            .let {
+                // Only make clickable if there is an onClick
+                if (onClick != null) it.clickable {
+                    onClick(itemData)
+                } else it
             }
             .padding(8.dp)
     ) {
