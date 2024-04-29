@@ -26,7 +26,6 @@ class MainViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            delay(2000) // So we can see the spinner
             loadData()
         }
     }
@@ -44,6 +43,7 @@ class MainViewModel : ViewModel() {
     }
 
     private suspend fun loadData() {
+        delay(1000) // Pretend its hard
         val result = getTheoreticalOneRepMaxes(repo, Brzycki)
         if (result.isErr) {
             _contentUiState.value = ContentUiState.Error
