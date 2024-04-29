@@ -43,6 +43,8 @@ fun ExerciseMaxDetails(
                 LineChart(context).apply {
                     legend.isEnabled = false
 
+                    // TODO: Figure out x and y labels
+
                     xAxis.isEnabled = true
                     xAxis.setDrawLabels(true)
                     xAxis.position = XAxis.XAxisPosition.TOP
@@ -63,6 +65,7 @@ fun ExerciseMaxDetails(
                     }
                     val dataset = LineDataSet(lineEntries, "")
                     dataset.color = lineColor.toArgb()
+                    dataset.circleColors = listOf(lineColor.toArgb())
                     data = LineData(dataset)
 
                     invalidate()
