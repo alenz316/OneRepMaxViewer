@@ -3,7 +3,6 @@ package com.tonylenz.orm.business.usecase
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
-import com.tonylenz.orm.business.calculateBrzyckiOneRepMax
 import com.tonylenz.orm.data.HistoricalDataRepo
 import com.tonylenz.orm.model.Exercise
 import com.tonylenz.orm.model.OneRepMaxEstimateStrategy
@@ -35,10 +34,6 @@ suspend fun getTheoreticalOneRepMaxes(
     strategy: OneRepMaxEstimateStrategy
 ): Result<List<OneRepMax>, Exception> = withContext(Dispatchers.Default) {
     try {
-        val theoreticalOneRepMaxCalc = when (strategy) {
-            OneRepMaxEstimateStrategy.Brzycki -> ::calculateBrzyckiOneRepMax
-            // TODO: Support more theoretical max calculations
-        }
         // Group all workout sets by exercise
         val exerciseMap: Map<Exercise, List<WorkoutSet>> =
             repo.getWorkoutSets().groupBy { it.exercise }
@@ -53,7 +48,7 @@ suspend fun getTheoreticalOneRepMaxes(
                     if (set.reps.count == 1) {
                         set.weight.value
                     } else {
-                        theoreticalOneRepMaxCalc(set.weight, set.reps).value
+                        strategy.calculateTheoreticalOneRepMax(set.weight, set.reps).value
                     }
                 }
                 date to Weight(maxCalcVal, WeightUnit.Pounds)

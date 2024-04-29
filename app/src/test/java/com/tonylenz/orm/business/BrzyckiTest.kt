@@ -1,5 +1,6 @@
 package com.tonylenz.orm.business
 
+import com.tonylenz.orm.model.Brzycki
 import com.tonylenz.orm.model.Reps
 import com.tonylenz.orm.model.Weight
 import com.tonylenz.orm.model.WeightUnit.Pounds
@@ -8,13 +9,13 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 // Expected values calculated with https://www.vcalc.com/wiki/brzycki
-class OrmBrzyckiTest {
+class BrzyckiTest {
 
     @Test
     fun `Standard calculations`() {
         assertEquals(
             Weight(112.5, Pounds),
-            calculateBrzyckiOneRepMax(
+            Brzycki.calculateTheoreticalOneRepMax(
                 Weight(100.0, Pounds),
                 Reps(5)
             )
@@ -22,7 +23,7 @@ class OrmBrzyckiTest {
 
         assertEquals(
             Weight(112.5, Pounds),
-            calculateBrzyckiOneRepMax(
+            Brzycki.calculateTheoreticalOneRepMax(
                 Weight(100.0, Pounds),
                 Reps(5)
             )
@@ -32,7 +33,7 @@ class OrmBrzyckiTest {
     @Test
     fun `Fail 1 rep`() {
         assertFailsWith(IllegalArgumentException::class) {
-            calculateBrzyckiOneRepMax(
+            Brzycki.calculateTheoreticalOneRepMax(
                 Weight(100.0, Pounds),
                 Reps(1)
             )
@@ -44,7 +45,7 @@ class OrmBrzyckiTest {
         // Silly but acceptable
         assertEquals(
             Weight(0.0, Pounds),
-            calculateBrzyckiOneRepMax(
+            Brzycki.calculateTheoreticalOneRepMax(
                 Weight(0.0, Pounds),
                 Reps(5)
             )

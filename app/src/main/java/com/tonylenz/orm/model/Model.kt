@@ -2,8 +2,8 @@ package com.tonylenz.orm.model
 
 import kotlinx.datetime.LocalDate
 
-enum class OneRepMaxEstimateStrategy {
-    Brzycki, // Add more estimating strategies here
+sealed interface OneRepMaxEstimateStrategy {
+    fun calculateTheoreticalOneRepMax(weight: Weight, reps: Reps): Weight
 }
 
 @JvmInline

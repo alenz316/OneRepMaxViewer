@@ -3,7 +3,7 @@ package com.tonylenz.orm.business.usecase
 import com.tonylenz.orm.data.HistoricalDataMemRepo
 import com.tonylenz.orm.data.HistoricalDataRepo
 import com.tonylenz.orm.model.Exercise
-import com.tonylenz.orm.model.OneRepMaxEstimateStrategy
+import com.tonylenz.orm.model.Brzycki
 import com.tonylenz.orm.model.Reps
 import com.tonylenz.orm.model.Weight
 import com.tonylenz.orm.model.WeightUnit
@@ -57,7 +57,7 @@ class GetTheoreticalOneRepMaxesTest {
         val repo = HistoricalDataMemRepo()
         repo.saveWorkoutSets(historyData, replaceAll = false)
 
-        val result = getTheoreticalOneRepMaxes(repo, OneRepMaxEstimateStrategy.Brzycki)
+        val result = getTheoreticalOneRepMaxes(repo, Brzycki)
 
         assertTrue(result.isOk)
 
@@ -101,7 +101,7 @@ class GetTheoreticalOneRepMaxesTest {
                 throw ExpectedException()
             }
 
-        }, OneRepMaxEstimateStrategy.Brzycki)
+        }, Brzycki)
 
         assertTrue(result.isErr)
 
