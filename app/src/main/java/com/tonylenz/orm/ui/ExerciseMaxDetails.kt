@@ -57,6 +57,7 @@ fun ExerciseMaxDetails(
                     val dataset = LineDataSet(lineEntries, "")
                     dataset.color = lineColor.toArgb()
                     dataset.circleColors = listOf(lineColor.toArgb())
+                    dataset.setDrawValues(false)
                     data = LineData(dataset)
 
                     xAxis.isEnabled = true
